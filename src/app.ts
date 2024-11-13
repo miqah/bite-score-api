@@ -12,14 +12,19 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors()); // Enable CORS for all incoming requests
+// Enable CORS for a specific origin
+const corsOptions = {
+  origin: "https://miqah.github.io", // or the full URL: https://miqah.github.io/bite-score-app/
+  methods: "GET,POST,PUT,DELETE", // Adjust methods as needed
+};
+
+app.use(cors(corsOptions)); // Use CORS with specified options
 app.use(express.json());
 
 // Connect to MongoDB
 connectDB();
 createTempUsers();
 
-// Define your routes
 app.use("/api/auth", authRoutes);
 app.use("/api", profileRoutes);
 app.use("/api", recipeRoutes);
