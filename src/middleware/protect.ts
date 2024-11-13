@@ -21,8 +21,10 @@ const protect = async (
     return;
   }
 
+  const secret = process.env.JWT_SECRET;
+
   try {
-    const decoded: any = jwt.verify(token, "your-jwt-secret");
+    const decoded: any = jwt.verify(token, secret || '');
     req.user = decoded.id; // Attach user ID to request
     next(); // Pass control to the next middleware/route handler
   } catch (err) {
