@@ -34,4 +34,17 @@ router.get("/recipes", async (req: Request, res: Response) => {
   }
 });
 
+// Delete a recipe
+router.delete("/recipes/:id", protect, async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const deletedRecipe = await Recipe.findByIdAndDelete(id); // Delete the recipe by ID
+
+    res.status(200).json({ message: "Recipe deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting recipe" });
+  }
+});
+
 export default router;
