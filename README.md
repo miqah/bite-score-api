@@ -1,1 +1,1 @@
-# bite-score-api
+Backend for school project
